@@ -3,16 +3,17 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
-# 👇 Accept build-time variable
-ARG VITE_PRODUCT_API
-ENV VITE_PRODUCT_API=$VITE_PRODUCT_API
-
 # Install dependencies
 COPY package*.json ./
 RUN npm install
 
 # Copy source
 COPY . .
+
+# Accept build argument
+ARG VITE_PRODUCT_API
+# Set it as environment variable for the build
+ENV VITE_PRODUCT_API=${VITE_PRODUCT_API}
 
 # Build the react app
 RUN npm run build

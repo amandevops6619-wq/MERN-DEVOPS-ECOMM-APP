@@ -25,6 +25,8 @@ services:
   frontend:
     build:
       context: ./frondend
+      args:
+        VITE_PRODUCT_API: ${VITE_PRODUCT_API}
     container_name: frontend
     env_file:
       - .env
