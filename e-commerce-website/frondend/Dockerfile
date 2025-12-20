@@ -3,6 +3,10 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
+# 👇 Accept build-time variable
+ARG VITE_PRODUCT_API
+ENV VITE_PRODUCT_API=$VITE_PRODUCT_API
+
 # Install dependencies
 COPY package*.json ./
 RUN npm install
