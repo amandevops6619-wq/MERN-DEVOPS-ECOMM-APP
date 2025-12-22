@@ -1,6 +1,12 @@
 # Dependencies
 node_modules/
 
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+
 # Environment variables
 .env
 .env.local
