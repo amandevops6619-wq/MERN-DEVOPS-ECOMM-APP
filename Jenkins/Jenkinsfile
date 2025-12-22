@@ -48,7 +48,7 @@ pipeline {
         sh """
           docker build \
             -t \$DOCKERHUB_USER/\$BACKEND_IMAGE:\$GIT_SHA \
-            ./backend
+            ../e-commerce-website/backend
         """
       }
     }
@@ -59,7 +59,7 @@ pipeline {
           docker build \
             --build-arg VITE_PRODUCT_API=http://54.195.157.117:8000 \
             -t \$DOCKERHUB_USER/\$FRONTEND_IMAGE:\$GIT_SHA \
-            ./frontend
+            ../e-commerce-website/frondend
         """
       }
     }
