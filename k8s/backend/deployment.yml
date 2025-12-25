@@ -31,7 +31,7 @@ spec:
             - name: CLOUD_NAME
               value: dbrd2j2lo
             - name: CLOUD_API_KEY
-              value: 544732963741955
+              value: "544732963741955"
             - name: CLOUD_API_SECRET
               value: LlkrKhmuE2klXfqTwmDXDblZvWo
             - name: PORT
