@@ -54,13 +54,20 @@ pipeline {
     }
 
     stage("Update Kubernetes Manifests") {
-      steps {
-        sh """
-          sed -i 's|image: amandevop/ecommerce-backend:.*|image: amandevop/ecommerce-backend:$GIT_SHA|' ../k8s/backend/deployment.yml
-          sed -i 's|image: amandevop/ecommerce-frontend:.*|image: amandevop/ecommerce-frontend:$GIT_SHA|' ../k8s/frontend/deployment.yml
-        """
-      }
-    }
+  steps {
+    sh """
+      echo "Current directory:"
+      pwd
+      echo "Listing k8s structure:"
+      ls -la k8s/
+      ls -la k8s/backend/
+      ls -la k8s/frontend/
+      
+      sed -i 's|image: amandevop/ecommerce-backend:.*|image: amandevop/ecommerce-backend:$GIT_SHA|' k8s/backend/deployment.yml
+      sed -i 's|image: amandevop/ecommerce-frontend:.*|image: amandevop/ecommerce-frontend:$GIT_SHA|' k8s/frontend/deployment.yml
+    """
+  }
+}
 
     stage("Commit & Push Manifests") {
       steps {
