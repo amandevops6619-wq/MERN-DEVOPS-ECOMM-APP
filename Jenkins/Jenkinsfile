@@ -56,8 +56,8 @@ pipeline {
     stage("Update Kubernetes Manifests") {
       steps {
         sh """
-          sed -i 's|image: amandevop/ecommerce-backend:.*|image: amandevop/ecommerce-backend:$GIT_SHA|' ../k8s/backend/deployment.yaml
-          sed -i 's|image: amandevop/ecommerce-frontend:.*|image: amandevop/ecommerce-frontend:$GIT_SHA|' ../k8s/frontend/deployment.yaml
+          sed -i 's|image: amandevop/ecommerce-backend:.*|image: amandevop/ecommerce-backend:$GIT_SHA|' ../k8s/backend/deployment.yml
+          sed -i 's|image: amandevop/ecommerce-frontend:.*|image: amandevop/ecommerce-frontend:$GIT_SHA|' ../k8s/frontend/deployment.yml
         """
       }
     }
@@ -68,7 +68,7 @@ pipeline {
           git config user.email "jenkins@ci.com"
           git config user.name "jenkins"
 
-          git add k8s/backend/deployment.yaml k8s/frontend/deployment.yaml
+          git add k8s/backend/deployment.yml k8s/frontend/deployment.yml
           git commit -m "Deploy images $GIT_SHA"
           git push origin master
         """
