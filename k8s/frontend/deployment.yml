@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: amandevop/ecommerce-frontend:latest
+          image: amandevop/ecommerce-frontend:REPLACE_ME
           imagePullPolicy: Always
           ports:
             - containerPort: 80
