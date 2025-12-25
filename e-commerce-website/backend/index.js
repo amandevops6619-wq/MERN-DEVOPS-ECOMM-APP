@@ -15,7 +15,7 @@ connectDb(); // connection to database
 const app = express();
 
 app.use(cors({
-  origin: `*`,
+  origin: "*",
 }))
 
 // body parser middleware
