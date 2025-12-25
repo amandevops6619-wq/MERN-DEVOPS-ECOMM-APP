@@ -27,47 +27,50 @@ pipeline {
       }
     }
 
-    stage("Docker Hub Login") {
+    stage("Docker Login") {
       steps {
         withCredentials([usernamePassword(
           credentialsId: 'docker_creds',
           usernameVariable: 'DOCKER_USER',
           passwordVariable: 'DOCKER_PASS'
         )]) {
-          sh """
-            echo \$DOCKER_PASS | docker login \
-              -u \$DOCKER_USER \
-              --password-stdin
-          """
+          sh '''
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          '''
         }
       }
     }
 
-    stage("Build Backend Image") {
+    stage("Build & Push Images") {
       steps {
         sh """
-          docker build \
-            -t \$DOCKERHUB_USER/\$BACKEND_IMAGE:\$GIT_SHA \
-            ./e-commerce-website/backend
+          docker build -t $DOCKERHUB_USER/$BACKEND_IMAGE:$GIT_SHA ./e-commerce-website/backend
+          docker build -t $DOCKERHUB_USER/$FRONTEND_IMAGE:$GIT_SHA ./e-commerce-website/frondend
+
+          docker push $DOCKERHUB_USER/$BACKEND_IMAGE:$GIT_SHA
+          docker push $DOCKERHUB_USER/$FRONTEND_IMAGE:$GIT_SHA
         """
       }
     }
 
-    stage("Build Frontend Image") {
+    stage("Update Kubernetes Manifests") {
       steps {
         sh """
-          docker build \
-            -t \$DOCKERHUB_USER/\$FRONTEND_IMAGE:\$GIT_SHA \
-            ./e-commerce-website/frondend
+          sed -i 's|image: amandevop/ecommerce-backend:.*|image: amandevop/ecommerce-backend:$GIT_SHA|' k8s/backend/deployment.yaml
+          sed -i 's|image: amandevop/ecommerce-frontend:.*|image: amandevop/ecommerce-frontend:$GIT_SHA|' k8s/frontend/deployment.yaml
         """
       }
     }
 
-    stage("Push Images to Docker Hub") {
+    stage("Commit & Push Manifests") {
       steps {
         sh """
-          docker push \$DOCKERHUB_USER/\$BACKEND_IMAGE:\$GIT_SHA
-          docker push \$DOCKERHUB_USER/\$FRONTEND_IMAGE:\$GIT_SHA
+          git config user.email "jenkins@ci.com"
+          git config user.name "jenkins"
+
+          git add k8s/backend/deployment.yaml k8s/frontend/deployment.yaml
+          git commit -m "Deploy images $GIT_SHA"
+          git push origin master
         """
       }
     }
