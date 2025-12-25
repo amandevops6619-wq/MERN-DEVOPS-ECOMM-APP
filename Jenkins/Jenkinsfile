@@ -57,7 +57,6 @@ pipeline {
       steps {
         sh """
           docker build \
-            --build-arg VITE_PRODUCT_API=http://54.195.157.117:8000 \
             -t \$DOCKERHUB_USER/\$FRONTEND_IMAGE:\$GIT_SHA \
             ./e-commerce-website/frondend
         """

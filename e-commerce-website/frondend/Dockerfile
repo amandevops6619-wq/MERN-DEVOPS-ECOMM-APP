@@ -10,11 +10,6 @@ RUN npm install
 # Copy source
 COPY . .
 
-# Accept build argument
-ARG VITE_PRODUCT_API
-# Set it as environment variable for the build
-ENV VITE_PRODUCT_API=${VITE_PRODUCT_API}
-
 # Build the react app
 RUN npm run build
 

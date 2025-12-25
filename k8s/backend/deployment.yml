@@ -18,7 +18,21 @@ spec:
           ports:
             - containerPort: 8000
           env:
-            - name: MONGO_URI
-              value: mongodb://mongo:27017/mern
+            - name: MONGO_URL
+              value: mongodb+srv://shopper:shopper123@cluster0.8fx4cu5.mongodb.net/shopper?retryWrites=true&w=majority
+            - name: JWT_SECRET
+              value: amankumarguptamechanicalengineerimsengineeringcollege
+            - name: PAYPAL_CLIENT_ID
+              value: AU9nMoIAEG3az5x9Mya5YV6kJGopAlMAdDQfozVs1l2yUs2qTmcofCHwcsk2YkBcNZ43fmuOYCJhRn4G
+            - name: SAMPLE_IMAGE_URL
+              value: https://res.cloudinary.com/dbrd2j2lo/image/upload/v1700741067/rmposmhs7ewplhtsvvmi.jpg
+            - name: SAMPLE_PUBLIC_ID
+              value: rmposmhs7ewplhtsvvmi
+            - name: CLOUD_NAME
+              value: dbrd2j2lo
+            - name: CLOUD_API_KEY
+              value: 544732963741955
+            - name: CLOUD_API_SECRET
+              value: LlkrKhmuE2klXfqTwmDXDblZvWo
             - name: PORT
               value: "8000"
