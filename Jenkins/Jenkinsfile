@@ -47,7 +47,7 @@ pipeline {
       steps {
         sh """
           docker build \
-            -t \$DOCKERHUB_USER/\$BACKEND_IMAGE:\$GIT_SHA \
+            -t \$DOCKERHUB_USER/\$BACKEND_IMAGE:latest \
             ./e-commerce-website/backend
         """
       }
@@ -57,7 +57,7 @@ pipeline {
       steps {
         sh """
           docker build \
-            -t \$DOCKERHUB_USER/\$FRONTEND_IMAGE:\$GIT_SHA \
+            -t \$DOCKERHUB_USER/\$FRONTEND_IMAGE:latest \
             ./e-commerce-website/frondend
         """
       }
@@ -66,8 +66,8 @@ pipeline {
     stage("Push Images to Docker Hub") {
       steps {
         sh """
-          docker push \$DOCKERHUB_USER/\$BACKEND_IMAGE:\$GIT_SHA
-          docker push \$DOCKERHUB_USER/\$FRONTEND_IMAGE:\$GIT_SHA
+          docker push \$DOCKERHUB_USER/\$BACKEND_IMAGE:latest
+          docker push \$DOCKERHUB_USER/\$FRONTEND_IMAGE:latest
         """
       }
     }
