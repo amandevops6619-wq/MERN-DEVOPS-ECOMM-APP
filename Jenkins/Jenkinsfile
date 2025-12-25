@@ -56,8 +56,8 @@ pipeline {
     stage("Update Kubernetes Manifests") {
       steps {
         sh """
-          sed -i 's|image: amandevop/ecommerce-backend:.*|image: amandevop/ecommerce-backend:$GIT_SHA|' k8s/backend/deployment.yaml
-          sed -i 's|image: amandevop/ecommerce-frontend:.*|image: amandevop/ecommerce-frontend:$GIT_SHA|' k8s/frontend/deployment.yaml
+          sed -i 's|image: amandevop/ecommerce-backend:.*|image: amandevop/ecommerce-backend:$GIT_SHA|' ../k8s/backend/deployment.yaml
+          sed -i 's|image: amandevop/ecommerce-frontend:.*|image: amandevop/ecommerce-frontend:$GIT_SHA|' ../k8s/frontend/deployment.yaml
         """
       }
     }
