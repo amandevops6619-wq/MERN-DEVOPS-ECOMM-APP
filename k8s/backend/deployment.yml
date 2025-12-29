@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: amandevop/ecommerce-backend:adb7c97
+          image: amandevop/ecommerce-backend:2d3bf76
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
