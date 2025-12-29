@@ -91,7 +91,7 @@ pipeline {
     stage("Commit & Push Manifests") {
       steps {
         withCredentials([usernamePassword(
-          credentialsId: 'github-pat',
+          credentialsId: 'github_pat',
           usernameVariable: 'GIT_USER',
           passwordVariable: 'GIT_TOKEN'
         )]) {
