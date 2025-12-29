@@ -61,7 +61,7 @@ const Header = () => {
               {!userInfo ? (
                 <LinkContainer to="/login">
                   <Nav.Link className="d-flex align-items-center gap-1">
-                    <FaUser /> <span>Login12345</span>
+                    <FaUser /> <span>Login</span>
                   </Nav.Link>
                 </LinkContainer>
               ) : (
