@@ -96,7 +96,7 @@ pipeline {
           passwordVariable: 'GIT_TOKEN'
         )]) {
           sh """
-            git checkout --track origin/k8s || git checkout k8s
+            git switch k8s --no-guess
 
             git config user.email "aman.devops6619@gmail.com"
             git config user.name ${GIT_USER}
